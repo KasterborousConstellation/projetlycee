@@ -2,8 +2,9 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.template import loader
 from django.views.decorators.csrf import csrf_protect
-from .utility import sha256, has_student, get_student
-
+from .utility import sha256, has_student, get_student, createUUID
+from .models import Token
+import datetime
 @csrf_protect
 def loginPage(request):
     template = loader.get_template('login/index.html')
@@ -25,7 +26,9 @@ def login(request):
             #Verification que l'élève a entrer le bon mot de passe
             if(password==student.password):
                 #TODO Create token
-                return redirect(f"/soutien/?identifiant={ 'test' }")
+                token = Token(UUID=createUUID(), student=student)
+                token.save()
+                return redirect(f"/soutien/?identifiant={ token.UUID }")
             else: 
                 return redirect(loginPage)
         else:
@@ -36,6 +39,13 @@ def login(request):
     
 def site(request):
     query = request.GET.get('identifiant',None)
-    if(query==None):
+    #Recherche des tokens avec cet identifiant (Normalement y'en a qu'un)
+    a = Token.objects.filter(UUID=query)
+    #Validation du Token 
+    #TODO Expiration des Tokens
+    if(len(a)==0):
         return redirect(loginPage)
-    return HttpResponse(f"<h1>{str(query)}</h1>")
+    student = a[0].student
+    distance = ((datetime.datetime.now(datetime.timezone.utc)-a[0].creation_date))
+    print(distance)
+    return render(request,'login/login.html',{"nom":student.nom,"prenom":student.prenom,"serie":student.serie})
