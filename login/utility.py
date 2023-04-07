@@ -20,3 +20,9 @@ def createUUID():
     for i in range(20):
         char = char + data[randint(0,len(data)-1)]
     return char
+def convert_hour(id:int):
+    array = ["8h05","9h00","10h10","11h05","12h00","13h00","13h55","14h50","16h00","16h55","17h50"]
+    return array[id]
+def convert_serie(chars:str):
+    array = {"gen":"Générale"}
+    return array.get(chars,"")

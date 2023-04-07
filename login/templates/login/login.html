@@ -1,20 +1,16 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset='utf-8'>
-    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Soutien Fulbert</title>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>  
-</head>
-<body>
-    <header>
-        <div class="header-container">
-            <div class='info'>
-                <p>{{nom}}</p>
-                <p>{{prenom}}</p>
-                <p>{{serie}}</p>
-            </div>
+{% extends "soutien_template.html" %}
+{% block header %}
+<header>
+    <div class = "logo">
+        {% load static %} <img src= "{% static 'images/fulbert.jpg' %}" class="logo-container" alt="logo fulbert" />
+    </div>
+    <div class='info-container'>
+        <p><u><strong>Infos:</strong></u></p>
+        <div class='info'>
+            <p>Nom: {{nom}}</p>
+            <p>Prénom: {{prenom}}</p>
+            <p>Série: {{serie}}</p>
         </div>
-    </header>
-</body>
-</html>
+    </div>
+</header>
+{% endblock %}

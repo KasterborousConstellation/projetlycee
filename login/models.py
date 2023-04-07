@@ -14,10 +14,16 @@ class Token(models.Model):
     creation_date= models.DateTimeField(auto_now_add=True)
     student = models.ForeignKey(Student,on_delete=models.CASCADE)
 
+class Slot(models.Model):
+    matiere= models.CharField(max_length=20)
+    heure = models.IntegerField()
+
 class Class(models.Model):
     professor = models.ForeignKey(Student,on_delete=models.CASCADE)
     places = models.IntegerField()
     students = models.ManyToManyField(Student,related_name="class_student")
+    date = models.DateField()
+    slot = models.ForeignKey(Slot,on_delete=models.CASCADE)
 
 
 #To run python manage.py migrate --fake login zero 
