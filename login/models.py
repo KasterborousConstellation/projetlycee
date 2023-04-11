@@ -9,6 +9,8 @@ class Student(models.Model):
     classe = models.IntegerField(default=1)
     identifiant = models.CharField(max_length=20,default='eleve')
     password = models.CharField(max_length=64,default="")
+    genre = models.CharField(max_length=1,default="M")
+    
 class Token(models.Model):
     UUID = models.CharField(max_length=20,unique=True)
     creation_date= models.DateTimeField(auto_now_add=True)
@@ -20,10 +22,10 @@ class Slot(models.Model):
 
 class Class(models.Model):
     professor = models.ForeignKey(Student,on_delete=models.CASCADE)
-    places = models.IntegerField()
+    places = models.IntegerField(default=5)
     students = models.ManyToManyField(Student,related_name="class_student")
-    date = models.DateField()
-    slot = models.ForeignKey(Slot,on_delete=models.CASCADE)
+    month = models.IntegerField(default=1)
+    day = models.IntegerField(default=1)
+    slot = models.ForeignKey(Slot,on_delete=models.CASCADE,default=None,null=True)
 
-
-#To run python manage.py migrate --fake login zero 
+#To run python manage.py migrate --fake login zero

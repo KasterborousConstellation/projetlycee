@@ -1,16 +1,110 @@
 {% extends "soutien_template.html" %}
+
+
+{% block staticfiles %}
+{% load static %} <link rel="stylesheet" href="{% static 'css/main.css'' %}">
+{% endblock %}
+
 {% block header %}
 <header>
-    <div class = "logo">
-        {% load static %} <img src= "{% static 'images/fulbert.jpg' %}" class="logo-container" alt="logo fulbert" />
-    </div>
-    <div class='info-container'>
-        <p><u><strong>Infos:</strong></u></p>
-        <div class='info'>
-            <p>Nom: {{nom}}</p>
-            <p>Prénom: {{prenom}}</p>
-            <p>Série: {{serie}}</p>
+    <div class=" header">
+        <div class = "logo">
+            {% load static %} <img src= "{% static 'images/fulbert.jpg' %}" class="logo-container" alt="logo fulbert" />
+        </div>
+        <div class='info-container'>
+            <div class='info'>
+                <h1 class="personal-info"> {{prenom}} {{nom}}</h1>
+                <div class="info-separator"></div>
+                <h2 class="serie">{{classe}} {{serie}}</h2>
+            </div>
         </div>
     </div>
 </header>
+{% endblock %}
+{% block navbar %} 
+
+<nav class="box">
+    <ul>
+        <li class="deroulant-container"><a href="" class ="deroulant-title" >Matière &ensp;</a>
+           <ul class ="deroulant box">
+                {% for elt in urls %}
+                <li><a href="{{elt.1}}">{{elt.0}}</a></li>
+                {% endfor %}
+           </ul>
+        </li>
+    </ul>
+</nav>
+{% endblock %}
+{% block content %} 
+<main>
+    <div class ="tab-info box">
+      <h2 class="title-info">Inscription de la semaine</h2>
+      <p>Vous pouvez vous inscrire pour le soutien la semaine du {{first_day}} au {{last_day}}.</p>
+      <p>Vous avez jusqu'au {{final_day}} 23h59 pour vous inscrire au soutien de la semaine prochaine.</p>
+      <p>Chaque semaine vous pouvez vous inscrire pour le soutien proposé pour la semaine suivante.</p>
+    </div>
+    <div class="calendar">
+        <div class="outer">
+            <table>
+                <thead>
+                    <tr>
+                      <th class="headcol"></th>
+                      {% for elt in days %}
+                        <th>{{elt}}</th>
+                      {% endfor %}
+                    </tr>
+                  </thead>
+                  </table>
+                <div class="wrap"> 
+                  <table class="offset">
+                  <tbody>
+                    {% for key, values in crenaux.items %}
+                    <tr class ="calendar-content">
+                      <td class="headcol">{{values.0}}</td>
+                      {% for elm in values.1 %}
+                        <td>
+                          {% if elm != None %}
+                            <div class="event event-main">
+                              <p>{{elm.0}}</p>
+                              <p>{{elm.1}}</p>
+                            </div>
+                          {% endif %}
+                        </td>
+                      {% endfor %}
+                    </tr>
+                    <tr class ="calendar-content">
+                      <td class="headcol"></td>
+                      {% for elm in values.2 %}
+                        <td>
+                          {% if elm != None %}
+                            <div class="event clickable event-addon">
+                              <p>Place: {{elm.0}}/{{elm.1}}</p>
+                              <form action="subscribe" method="POST">
+                                {% csrf_token %}
+                                <input name="id" type="hidden" value="{{id}}">
+                                <input name="subscribe" type="hidden" value="{{elm.2}}">
+                                {% if elm.2 == True %}
+                                <input class="inscription-button unsubscribe" type="submit" value="Se désinscrire">
+                                {% else %}
+                                <input class="inscription-button unclicked" type="submit" value="S'inscrire">
+                                {% endif %}
+                              </form>
+                            </div>
+                          {% endif %}
+                        </td>
+                      {% endfor %}
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+        </div>
+    </div>
+  </main>
+{% endblock %}
+{% block footer %}
+<footer>
+  <div>
+    <p>©2023 Paul Andrieu | All Rights Reserved</p>
+  </div>
+</footer>
 {% endblock %}

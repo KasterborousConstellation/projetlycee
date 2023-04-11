@@ -1,6 +1,7 @@
 import hashlib
 from .models import Student
 from random import randint
+from datetime import date, timedelta
 def sha256(mdp):
     m = hashlib.sha256()
     m.update(mdp)
@@ -24,5 +25,22 @@ def convert_hour(id:int):
     array = ["8h05","9h00","10h10","11h05","12h00","13h00","13h55","14h50","16h00","16h55","17h50"]
     return array[id]
 def convert_serie(chars:str):
-    array = {"gen":"Générale"}
+    array = {"gen":"Générale","per":"Personnel Enseignant"}
     return array.get(chars,"")
+def get_classe(i:int):
+    if(i==-1):
+        return ""
+    a =["Seconde","Première","Terminale"]
+    return a[i]
+def getMonth(i:int):
+    months= ["Janvier","Février","Mars","Avril","Mai","Juin","Juillet","Août","Septembre","Octobre","Novembre","Décembre"]
+    return months[i]
+def getNextWeek():
+    today = date.today()
+    start = today - timedelta(days=today.weekday())+timedelta(days=7)
+    liste = [((start+timedelta(days=i)).day,(start+timedelta(days=i)).month) for i in range(5)]
+    return liste
+def getFinalDayForInscription():
+    today = date.today()
+    last = today - timedelta(days=today.weekday())+timedelta(days=6)
+    return (last.day,last.month)
