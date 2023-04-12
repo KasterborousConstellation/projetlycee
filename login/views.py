@@ -16,7 +16,6 @@ def error(request):
 def login(request):
     if(request.method =='POST'):
         post = request.POST
-        print(post)
         id = post["id"]
         #Encode le mot de passe en sha256.
         password = f"{post['password']}".encode()
@@ -93,13 +92,10 @@ def site(request):
                     crenaux_p_heure_addon.append(None)
                 else:
                     current_classe = classe[0]
-                    print(current_classe)
-                    print(hours[current_classe.slot.heure])
-                    print(hour)
                     if(hours[current_classe.slot.heure]==hour):
                         crenaux_p_heure.append([current_classe.slot.matiere,current_classe.professor.nom])
                         is_present = len(current_classe.students.all().filter(id=student.id))>0
-                        crenaux_p_heure_addon.append([len(current_classe.students.all()),current_classe.places,is_present])
+                        crenaux_p_heure_addon.append([len(current_classe.students.all()),current_classe.places,is_present,current_classe.id])
                     else:
                         crenaux_p_heure.append(None)
                         crenaux_p_heure_addon.append(None)
@@ -118,8 +114,10 @@ def subscribe(request):
     parameters="identifiant="+request.POST.get("id")
     url = f'/{"soutien/"}?{parameters}'
     #
-
-
-
+    class_id= request.POST.get('subscribe')
+    token = request.POST.get('id')
+    student = Token.objects.all().filter(UUID=token)[0]
+    current_class = Class.objects.all().filter(id=class_id)[0]
+    current_class.students.add(student)
     #Redirection à l'url de départ
     return redirect(url)
