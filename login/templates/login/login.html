@@ -83,7 +83,7 @@
                               <form action="subscribe" method="POST">
                                 {% csrf_token %}
                                 <input name="id" type="hidden" value="{{id}}">
-                                <input name="subscribe" type="hidden" value="{{elm.2}}">
+                                <input name="subscribe" type="hidden" value="{{elm.3}}">
                                 {% if elm.2 == True %}
                                 <input class="inscription-button unsubscribe" type="submit" value="Se désinscrire">
                                 {% else %}
