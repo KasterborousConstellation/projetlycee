@@ -113,11 +113,18 @@ def subscribe(request):
     #Regénère l'url de départ
     parameters="identifiant="+request.POST.get("id")
     url = f'/{"soutien/"}?{parameters}'
-    #
+    #Recupère l'id de la classe ou l'on veut s'inscrire 'subscribe' ainsi que le token de connexion
     class_id= request.POST.get('subscribe')
     token = request.POST.get('id')
-    student = Token.objects.all().filter(UUID=token)[0]
+    student = Token.objects.all().filter(UUID=token)[0].student
     current_class = Class.objects.all().filter(id=class_id)[0]
-    current_class.students.add(student)
+    has_student = len(current_class.students.all().filter(id=student.id))>0
+    #Vérifie si il reste encore des places
+    if(current_class.places<len(current_class.students)):
+        #Ajoute ou retire l'eleve aux élèves inscrits.
+        if(has_student):
+            current_class.students.remove(student)
+        else:
+            current_class.students.add(student)
     #Redirection à l'url de départ
     return redirect(url)
