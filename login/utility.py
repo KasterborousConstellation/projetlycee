@@ -2,6 +2,15 @@ import hashlib
 from .models import Student
 from random import randint
 from datetime import date, timedelta
+def get_style_attribute(matiere:str):
+    a =matiere.upper()
+    for elt in get_matiere():
+        if(a==elt[0].upper()):
+            return elt[1]
+    return "#777777"
+def get_matiere():
+    a= [("Physique-Chimie","#1e81b0"),("Mathématiques","#fdfc1a")]
+    return a
 def sha256(mdp):
     m = hashlib.sha256()
     m.update(mdp)
@@ -37,10 +46,10 @@ def getMonth(i:int):
     return months[i]
 def getNextWeek():
     today = date.today()
-    start = today - timedelta(days=today.weekday())+timedelta(days=7)
+    start = today - timedelta(days=(today.weekday()+2)%7)+timedelta(days=9)
     liste = [((start+timedelta(days=i)).day,(start+timedelta(days=i)).month) for i in range(5)]
-    return liste
+    return liste	
 def getFinalDayForInscription():
     today = date.today()
-    last = today - timedelta(days=today.weekday())+timedelta(days=6)
+    last = today - timedelta(days=(today.weekday()+2 )%7)+timedelta(days=6)
     return (last.day,last.month)

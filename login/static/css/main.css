@@ -48,7 +48,7 @@ header{
 .info-separator{
     margin-left: 5%;
     width: 90%;
-    height: 0.2vh;
+    height: 0.3vh;
     background-color: #2a2a72;
     background-image: linear-gradient(315deg, #009ffd 0%, #2a2a72 74%);
 }
@@ -59,7 +59,7 @@ header{
     margin-bottom: 0%;
     top: 5%; 
     width: 80%;
-    font-size: min(1.25vw,100%);
+    font-size: 0.9vw;
 }
 .serie {
     margin-top: 1%;
@@ -68,7 +68,8 @@ header{
     position: relative;
     left: 7%;
     top: 2%; 
-    font-size: 0.95vw;
+    font-size: 1vw;
+    padding-right: 0.85vw;
 }
 nav ul *{
     margin: 0px;
@@ -317,7 +318,7 @@ tbody tr td {
 .event p{
     padding: 0;
     margin: 0;
-    font-size: 1.80vmin ;
+    font-size: 1.9vmin ;
 }
 main{
     max-height: 1000px;
@@ -357,8 +358,12 @@ main{
     border-bottom: solid grey 1px;
     border-right: solid grey 1px;
 }
-.event-addon p {
+.event-addon form {
     margin-top: 15px;
+    margin-bottom: 0;
+}
+.event-addon p {
+    margin-top: 0px;
 }
 footer{
     text-align: center;

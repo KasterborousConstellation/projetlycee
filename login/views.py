@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.template import loader
 from django.views.decorators.csrf import csrf_protect
-from .utility import sha256, has_student, get_student, createUUID, convert_serie,get_classe,getNextWeek,getMonth,getFinalDayForInscription
+from .utility import sha256, has_student, get_student, createUUID, convert_serie,get_classe,getNextWeek,getMonth,getFinalDayForInscription,get_matiere,get_style_attribute
 from .models import Token,Student,Class
 import datetime
 @csrf_protect
@@ -39,6 +39,9 @@ def login(request):
 @csrf_protect
 def site(request):
     query = request.GET.get('identifiant',None)
+    search = request.GET.get('query',None)
+    if(search == None or search=="" or len(search)==0):
+        search=None
     #Recherche des tokens avec cet identifiant (Normalement y'en a qu'un)
     a = Token.objects.filter(UUID=query)
     #Validation du Token 
@@ -61,8 +64,10 @@ def site(request):
             index+=1
         url+="identifiant="+token.UUID+"&query="
         #Recupère toute les matières et génère les urls de trie par matière
-        cours = ["Histoire","Mathématiques","Physique-Chimie"]
-        url_cours = [(elt,url+elt) for elt in cours]
+        cours = get_matiere()
+        url_cours = [(elt[0],url+elt[0]) for elt in cours]
+        url_cours.append(("Tous",url))
+        cours_color = [elt[1] for elt in cours]
         #Génère les jours de la semaine et les heures
         jours = ["Lundi","Mardi","Mercredi","Jeudi","Vendredi"]
         jours_id = getNextWeek()
@@ -92,10 +97,15 @@ def site(request):
                     crenaux_p_heure_addon.append(None)
                 else:
                     current_classe = classe[0]
+                    if(search!=None):
+                        if(search.upper()!=current_classe.slot.matiere.upper()):
+                            crenaux_p_heure.append(None)
+                            crenaux_p_heure_addon.append(None)
+                            continue
                     if(hours[current_classe.slot.heure]==hour):
-                        crenaux_p_heure.append([current_classe.slot.matiere,current_classe.professor.nom])
+                        crenaux_p_heure.append([current_classe.slot.matiere,current_classe.professor.nom,get_style_attribute(current_classe.slot.matiere),current_classe.professor.genre])
                         is_present = len(current_classe.students.all().filter(id=student.id))>0
-                        crenaux_p_heure_addon.append([len(current_classe.students.all()),current_classe.places,is_present,current_classe.id])
+                        crenaux_p_heure_addon.append([current_classe.places-len(current_classe.students.all()),current_classe.places,is_present,current_classe.id,get_style_attribute(current_classe.slot.matiere)])
                     else:
                         crenaux_p_heure.append(None)
                         crenaux_p_heure_addon.append(None)
@@ -104,7 +114,7 @@ def site(request):
         context["first_day"]=formatted_day[0]
         context["last_day"]=formatted_day[-1]
         final_day = getFinalDayForInscription()
-        context["final_day"]= "Dimanche "+str(final_day[0])+" "+getMonth(final_day[1])
+        context["final_day"]= "Vendredi "+str(final_day[0])+" "+getMonth(final_day[1])
         return render(request,'login/login.html',context)
     else:
         return redirect(loginPage)
@@ -120,7 +130,7 @@ def subscribe(request):
     current_class = Class.objects.all().filter(id=class_id)[0]
     has_student = len(current_class.students.all().filter(id=student.id))>0
     #Vérifie si il reste encore des places
-    if(current_class.places<len(current_class.students)):
+    if(current_class.places>len(current_class.students.all())):
         #Ajoute ou retire l'eleve aux élèves inscrits.
         if(has_student):
             current_class.students.remove(student)

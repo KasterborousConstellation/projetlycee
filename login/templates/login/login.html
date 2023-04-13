@@ -65,9 +65,14 @@
                       {% for elm in values.1 %}
                         <td>
                           {% if elm != None %}
-                            <div class="event event-main">
+                            <div class="event event-main" style="background-color:{{elm.2}};">
                               <p>{{elm.0}}</p>
-                              <p>{{elm.1}}</p>
+                              {% if elm.3 == 'M' %}
+                              <p>M.{{elm.1}}</p>
+                              {% else %}
+                              <p>Mme.{{elm.1}}</p>
+                              {% endif %}
+                              
                             </div>
                           {% endif %}
                         </td>
@@ -78,8 +83,8 @@
                       {% for elm in values.2 %}
                         <td>
                           {% if elm != None %}
-                            <div class="event clickable event-addon">
-                              <p>Place: {{elm.0}}/{{elm.1}}</p>
+                            <div class="event clickable event-addon" style="background-color:{{elm.4}};">
+                              
                               <form action="subscribe" method="POST">
                                 {% csrf_token %}
                                 <input name="id" type="hidden" value="{{id}}">
@@ -90,6 +95,7 @@
                                 <input class="inscription-button unclicked" type="submit" value="S'inscrire">
                                 {% endif %}
                               </form>
+                              <p>Places: {{elm.0}}</p>
                             </div>
                           {% endif %}
                         </td>
