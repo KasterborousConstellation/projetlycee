@@ -44,9 +44,10 @@ def site(request):
         search=None
     #Recherche des tokens avec cet identifiant (Normalement y'en a qu'un)
     a = Token.objects.filter(UUID=query)
+    len_of_a = a.count
     #Validation du Token 
     #TODO Expiration des Tokens
-    if(len(a)==0):
+    if(len_of_a==0):
         return redirect(loginPage)
     token = a[0]
     student = token.student
@@ -67,7 +68,6 @@ def site(request):
         cours = get_matiere()
         url_cours = [(elt[0],url+elt[0]) for elt in cours]
         url_cours.append(("Tous",url))
-        cours_color = [elt[1] for elt in cours]
         #Génère les jours de la semaine et les heures
         jours = ["Lundi","Mardi","Mercredi","Jeudi","Vendredi"]
         jours_id = getNextWeek()
@@ -85,6 +85,7 @@ def site(request):
         context["days"]=formatted_day
         context["classe"]=get_classe(student.classe)
         context["n5"]=range(5)
+        context["autorisation"]= student.autorisation
         classes = Class.objects.all()
         array = {}
         for hour in hours:

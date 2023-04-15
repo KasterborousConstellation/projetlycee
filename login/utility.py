@@ -21,7 +21,7 @@ def has_student(identifiant):
         if(student.identifiant.upper()==identifiant.upper()):
             return True
     return False
-def get_student(id):
+def get_student(id:int):
     query = Student.objects.filter(identifiant=id)
     return query[0]
 def createUUID():
@@ -39,7 +39,7 @@ def convert_serie(chars:str):
 def get_classe(i:int):
     if(i==-1):
         return ""
-    a =["Seconde","Première","Terminale"]
+    a =["Seconde","Première","Terminale","BTS 1ère Année","BTS 2ème Année","Sans-Classe"]
     return a[i]
 def getMonth(i:int):
     months= ["Janvier","Février","Mars","Avril","Mai","Juin","Juillet","Août","Septembre","Octobre","Novembre","Décembre"]

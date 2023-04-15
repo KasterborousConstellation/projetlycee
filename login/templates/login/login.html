@@ -38,12 +38,25 @@
 {% endblock %}
 {% block content %} 
 <main>
-    <div class ="tab-info box">
-      <h2 class="title-info">Inscription de la semaine</h2>
-      <p>Vous pouvez vous inscrire pour le soutien la semaine du {{first_day}} au {{last_day}}.</p>
-      <p>Vous avez jusqu'au {{final_day}} 23h59 pour vous inscrire au soutien de la semaine prochaine.</p>
-      <p>Chaque semaine vous pouvez vous inscrire pour le soutien proposé pour la semaine suivante.</p>
+    <div class ="tab-info">
+      <div class="info-box box">
+        <h2 class="title-info">Inscription de la semaine</h2>
+        <p>Vous pouvez vous inscrire pour le soutien la semaine du {{first_day}} au {{last_day}}.</p>
+        <p>Vous avez jusqu'au {{final_day}} 23h59 pour vous inscrire au soutien de la semaine prochaine.</p>
+        <p>Chaque semaine vous pouvez vous inscrire pour le soutien proposé pour la semaine suivante.</p>
+      </div>
+      {% if autorisation > 1 %}
+      <div class="prof-container box">
+          <div class="prof">
+            <h3>Espace Professeur</h3>
+            <p>Accèdez à votre menu professeur.</p>
+            <a class="prof-acess inscription-button box" href="#">Accèder</a>
+          </div>
+      </div>
+      {% endif %}
     </div>
+    
+    
     <div class="calendar">
         <div class="outer">
             <table>
@@ -67,12 +80,11 @@
                           {% if elm != None %}
                             <div class="event event-main" style="background-color:{{elm.2}};">
                               <p>{{elm.0}}</p>
-                              {% if elm.3 == 'M' %}
+                              {% if elm.3 == 'G' %}
                               <p>M.{{elm.1}}</p>
                               {% else %}
                               <p>Mme.{{elm.1}}</p>
                               {% endif %}
-                              
                             </div>
                           {% endif %}
                         </td>

@@ -7,7 +7,7 @@ class Student(models.Model):
     autorisation = models.IntegerField(null=True)
     serie = models.CharField(max_length=3,default="gen")
     classe = models.IntegerField(default=1)
-    identifiant = models.CharField(max_length=20,default='eleve')
+    identifiant = models.CharField(max_length=128,default='eleve')
     password = models.CharField(max_length=64,default="")
     genre = models.CharField(max_length=1,default="M")
     
