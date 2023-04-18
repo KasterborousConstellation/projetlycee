@@ -16,9 +16,13 @@ class Token(models.Model):
     creation_date= models.DateTimeField(auto_now_add=True)
     student = models.ForeignKey(Student,on_delete=models.CASCADE)
 
+class Room(models.Model):
+    name = models.CharField(max_length=30)
+
 class Slot(models.Model):
     matiere= models.CharField(max_length=20)
     heure = models.IntegerField()
+    room = models.ForeignKey(Room,on_delete=models.CASCADE,null=True)
 
 class Class(models.Model):
     professor = models.ForeignKey(Student,on_delete=models.CASCADE)

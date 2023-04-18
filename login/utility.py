@@ -9,7 +9,7 @@ def get_style_attribute(matiere:str):
             return elt[1]
     return "#777777"
 def get_matiere():
-    a= [("Physique-Chimie","#1e81b0"),("Mathématiques","#fdfc1a")]
+    a= [("Physique-Chimie","#1e81b0"),("Mathématiques","#fdfc1a"),("Maths-Expertes","#fdfc1a"),("Maths-Complémentaire","#fdfc1a"),("Anglais","#9925be")]
     return a
 def sha256(mdp):
     m = hashlib.sha256()
@@ -53,3 +53,6 @@ def getFinalDayForInscription():
     today = date.today()
     last = today - timedelta(days=(today.weekday()+2 )%7)+timedelta(days=6)
     return (last.day,last.month)
+
+
+

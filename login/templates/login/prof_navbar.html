@@ -1,0 +1,27 @@
+{% extends "soutien_template.html" %}
+{% block staticfiles %}
+{% load static %} <link rel="stylesheet" href="{% static 'css/prof.css'' %}">
+{% load static %} <script type="text/javascript" src="{% static 'js/prof.js'%}"></script>
+
+    {% block files_extends %}
+
+    {% endblock %}
+
+{% endblock %}
+{% block navbar %}
+<div class="nav-header">
+    <h3>Professeur:</h3>
+    <p>{{nom}}</p>
+    <p>{{prenom}}</p>
+</div>
+<div class="vertical-nav box">
+    <ul>
+        {% for elt in urls %}
+            <li><a class="nav-item" href="{{elt.1}}">{{elt.0}}</a></li>
+        {% endfor %}
+    </ul>
+</div>
+<div class="nav-footer">
+    <a class="box" href="{{retour}}">Retour</a>
+</div>
+{% endblock %}

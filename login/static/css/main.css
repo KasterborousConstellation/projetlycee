@@ -70,13 +70,7 @@ header{
     font-size: 1vw;
     padding-right: 0.85vw;
 }
-nav ul *{
-    margin: 0px;
-    padding: 0px;
-}
-.box{
-    box-shadow: 0px 1px 1px black;
-}
+
 nav{
     font-size: 1.1vw;
     width: 97%;
@@ -86,74 +80,7 @@ nav{
     top: 0px;
 }
 
-nav ul{
-    width: 90%;
-    list-style-type: none;
-}
 
-nav ul li{
-    float: left;
-    width: 20%;
-    text-align: center;
-    position: relative;
-}
-
-nav ul::after{
-    content: "";
-    display: table;
-    clear: both;
-}
-
-nav a{
-    display: block;
-    text-decoration: none;
-    color: black;
-    border-bottom: 2px solid transparent;
-    padding: 10px 0px;
-}
-nav a:hover{
-    color: #009ffd;
-    border-bottom: 2px solid cornflowerblue;
-}
-.deroulant-title:hover{
-    color: #2a2a72;
-}
-.deroulant{
-    display: none;
-    box-shadow: 0px 1px 2px #CCC;
-    background-color: white;
-    position: absolute;
-    width: 100%;
-    z-index: 1000;
-}
-nav > ul li:hover .deroulant{
-    display: block;
-}
-.deroulant li{
-    float: none;
-    width: 100%;
-    text-align: left;
-}
-.deroulant a{
-    padding: 10px;
-    border-bottom: none;
-}
-.deroulant a:hover{
-    border-bottom: none;
-    background-color: RGBa(200,200,200,0.1);
-}
-.deroulant-container > a::after{
-    content:" ▼";
-    font-size: 12px;
-}
-.deroulant li{
-    display: flex;
-}
-.deroulant li a{
-    position: relative;
-    z-index: 1000;
-    width: 100%;
-}
 
 .content{
     flex-direction: column;

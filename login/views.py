@@ -4,7 +4,7 @@ from django.template import loader
 from django.views.decorators.csrf import csrf_protect
 from .utility import sha256, has_student, get_student, createUUID, convert_serie,get_classe,getNextWeek,getMonth,getFinalDayForInscription,get_matiere,get_style_attribute
 from .models import Token,Student,Class
-import datetime
+from .connection import connect
 @csrf_protect
 def loginPage(request):
     template = loader.get_template('login/index.html')
@@ -38,22 +38,14 @@ def login(request):
         return redirect(error)
 @csrf_protect
 def site(request):
-    query = request.GET.get('identifiant',None)
     search = request.GET.get('query',None)
     if(search == None or search=="" or len(search)==0):
         search=None
-    #Recherche des tokens avec cet identifiant (Normalement y'en a qu'un)
-    a = Token.objects.filter(UUID=query)
-    len_of_a = a.count
-    #Validation du Token 
-    #TODO Expiration des Tokens
-    if(len_of_a==0):
-        return redirect(loginPage)
-    token = a[0]
-    student = token.student
-    time_since_token = ((datetime.datetime.now(datetime.timezone.utc)-token.creation_date))/ datetime.timedelta(seconds=1)
+    connection = connect(request)
     #Vérifie la validité du Token.
-    if(time_since_token<30* 60):
+    if(connection.is_valid()):
+        student = connection.student
+        token = connection.token
         #Crée l'URL de la page
         url = ""
         uri = str(request.build_absolute_uri())
@@ -63,11 +55,11 @@ def site(request):
             char=uri[index]
             url+=char
             index+=1
-        url+="identifiant="+token.UUID+"&query="
+        contructed_url=url+"identifiant="+token.UUID+"&query="
         #Recupère toute les matières et génère les urls de trie par matière
         cours = get_matiere()
-        url_cours = [(elt[0],url+elt[0]) for elt in cours]
-        url_cours.append(("Tous",url))
+        url_cours = [(elt[0],contructed_url+elt[0]) for elt in cours]
+        url_cours.append(("Tous",contructed_url))
         #Génère les jours de la semaine et les heures
         jours = ["Lundi","Mardi","Mercredi","Jeudi","Vendredi"]
         jours_id = getNextWeek()
@@ -116,6 +108,7 @@ def site(request):
         context["last_day"]=formatted_day[-1]
         final_day = getFinalDayForInscription()
         context["final_day"]= "Vendredi "+str(final_day[0])+" "+getMonth(final_day[1])
+        context["prof_url"] = "/prof/?identifiant="+token.UUID+"&tab=0"
         return render(request,'login/login.html',context)
     else:
         return redirect(loginPage)
@@ -139,3 +132,35 @@ def subscribe(request):
             current_class.students.add(student)
     #Redirection à l'url de départ
     return redirect(url)
+
+def prof(request):
+    connection = connect(request)
+    if connection.is_valid():
+        tab = request.GET.get("tab",0)
+        token = connection.token
+        student = connection.student
+        context = {}
+        #Crée l'URL de la page
+        url = ""
+        uri = str(request.build_absolute_uri())
+        index =0
+        char =""
+        while char!="?":
+            char=uri[index]
+            url+=char
+            index+=1
+        constructed_url=url+"identifiant="+token.UUID+"&tab="
+        cours = [elm for elm in get_matiere()]
+
+
+        tabs = ["Créer un cours","Vos cours"]
+        urls = [(tabs[i],constructed_url+str(i)) for i in range(len(tabs))]
+        context["urls"]=urls
+        context["prenom"]=student.prenom
+        context["nom"]=student.nom
+        context["retour"] = "/soutien/?identifiant="+token.UUID
+        context["rooms"]= ["201","202","203","204","205","206"]
+        context["cours"]=cours
+        return render(request,'login/profs_content/prof_tab'+str(tab)+".html",context)
+    else:
+        return redirect(loginPage)

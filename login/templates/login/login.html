@@ -25,15 +25,17 @@
 {% block navbar %} 
 
 <nav class="box">
+  <div class="deroulant-template">
     <ul>
-        <li class="deroulant-container"><a href="" class ="deroulant-title" >Matière &ensp;</a>
-           <ul class ="deroulant box">
-                {% for elt in urls %}
-                <li><a href="{{elt.1}}">{{elt.0}}</a></li>
-                {% endfor %}
-           </ul>
-        </li>
+      <li class="deroulant-container"><a href="" class ="deroulant-title" >Matière &ensp;</a>
+        <ul class ="deroulant box">
+          {% for elt in urls %}
+            <li><a href="{{elt.1}}">{{elt.0}}</a></li>
+          {% endfor %}
+        </ul>
+      </li>
     </ul>
+  </div>
 </nav>
 {% endblock %}
 {% block content %} 
@@ -50,7 +52,7 @@
           <div class="prof">
             <h3>Espace Professeur</h3>
             <p>Accèdez à votre menu professeur.</p>
-            <a class="prof-acess inscription-button box" href="#">Accèder</a>
+            <a class="prof-acess inscription-button box" href="{{prof_url}}">Accèder</a>
           </div>
       </div>
       {% endif %}

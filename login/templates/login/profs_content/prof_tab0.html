@@ -1,0 +1,41 @@
+{% extends "../prof_navbar.html" %}
+{% block files_extends %}
+{% load static %} <link rel="stylesheet" href="{% static 'css/create_cours.css'' %}">
+{% endblock %}
+{% block content %}
+<h1>Créer un crénau de soutien</h1>
+<form action="" method="POST">
+    <div class="form-contaier">
+        <div class="group">      
+            <input 
+            class="room-input" id="salle-input" list="rooms" type="text" required>
+            <span class="highlight"></span>
+            <span id="bar" class="bar"></span>
+            <label>Salle</label>
+            <label id="room-input-message"></label>
+        </div>
+        <div class = "group">
+            <div class ="selector">
+                <div class="deroulant-template">
+                    <input type="text" readonly="readonly">
+                    <label class="stop">Matière</label>
+                    <ul>
+                        <li class="deroulant-container"><a class ="deroulant-title" >Parcourir &ensp;</a>
+                           <ul class ="deroulant box">
+                                {% for elt in cours %}
+                                <li><p class="nav">{{elt.0}}</p></li>
+                                {% endfor %}
+                           </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <datalist id="rooms">
+        {% for room in rooms %}
+        <option value="{{room}}" ></option>
+        {% endfor %}
+    </datalist>
+</form>
+{% endblock %}
