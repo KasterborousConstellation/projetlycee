@@ -151,8 +151,6 @@ def prof(request):
             index+=1
         constructed_url=url+"identifiant="+token.UUID+"&tab="
         cours = [elm for elm in get_matiere()]
-
-
         tabs = ["Créer un cours","Vos cours"]
         urls = [(tabs[i],constructed_url+str(i)) for i in range(len(tabs))]
         context["urls"]=urls
@@ -161,6 +159,7 @@ def prof(request):
         context["retour"] = "/soutien/?identifiant="+token.UUID
         context["rooms"]= ["201","202","203","204","205","206"]
         context["cours"]=cours
+        context["classes"]= [get_classe(i) for i in range(5)]
         return render(request,'login/profs_content/prof_tab'+str(tab)+".html",context)
     else:
         return redirect(loginPage)

@@ -3,23 +3,21 @@
     padding: 0px;
     width: 150px;
 }
-.box{
-    box-shadow: 0px 1px 1px black;
-}
 
 .group { 
     position:relative; 
-    margin-bottom:45px; 
-    left:25vw;
-    top:10vh;
+    margin-bottom:50px; 
+    left: 15vw;
+    top:5vh;
 }
 input 				{
-  font-size:1.05vw;
+  font-size:20px;
   padding:10px 10px 10px 5px;
   display:block;
   width:17vw;
   border:none;
   border-bottom:1px solid #757575;
+  height: 5vh;
 }
 .group input:focus { 
     outline:none;
@@ -28,7 +26,7 @@ input 				{
 
 label 				 {
   color:#999; 
-  font-size:1.2vw;
+  font-size:20px;
   font-weight:normal;
   position:absolute;
   pointer-events:none;
@@ -38,83 +36,14 @@ label 				 {
   -moz-transition:0.2s ease all; 
   -webkit-transition:0.2s ease all;
 }
-#room-input-message{
-    top: 50px;
-    color: brown;
-}
+
 
 input:focus ~ label:not(#room-input-message,.stop), input:valid ~ label:not(#room-input-message,.stop)		{
-  top:-20px;
-  font-size:1.1vw;
+  top:-30px;
+  font-size:20px;
   color:#5264AE;
 }
 
-
-.bar { 
-    position:relative; 
-    display:block;
-    width:17vw;
-    height: 1px;
-}
-.bar:before, .bar:after 	{
-  content:'';
-  height:3px;
-  width:0;
-  bottom:1px; 
-  position:absolute;
-  background:#5264AE; 
-  transition:0.2s ease all; 
-  -moz-transition:0.2s ease all; 
-  -webkit-transition:0.2s ease all;
-}
-.bar:before {
-  left:50%;
-}
-.bar:after {
-  right:50%; 
-}
-
-
-input:focus ~ .bar:before, input:focus ~ .bar:after {
-  width:50%;
-}
-
-.highlight {
-  position:absolute;
-  height:60%; 
-  width:17vw; 
-  top:25%; 
-  left:0;
-  pointer-events:none;
-  opacity:0.5;
-}
-
-/* active state */
-input:focus ~ .highlight {
-  -webkit-animation:inputHighlighter 0.3s ease;
-  -moz-animation:inputHighlighter 0.3s ease;
-  animation:inputHighlighter 0.3s ease;
-}
-
-/* ANIMATIONS ================ */
-@-webkit-keyframes inputHighlighter {
-	from { background:#5264AE; }
-  to 	{ width:0; background:transparent; }
-}
-@-moz-keyframes inputHighlighter {
-	from { background:#5264AE; }
-  to 	{ width:0; background:transparent; }
-}
-@keyframes inputHighlighter {
-	from { background:#5264AE; }
-  to 	{ width:0; background:transparent; }
-}
-.active{
-    background-color: green;
-}
-.non-active{
-    background-color: red;
-}
 .selector > *{
   display: flex;
 }
@@ -133,5 +62,23 @@ input:focus ~ .highlight {
     border-bottom: 2px solid cornflowerblue;
 }
 .content .deroulant-template .deroulant-container .deroulant-title{
-  width: 10vw;
+  width: 13vw;
+}
+.form-container{
+    position: relative;
+    left:15vw;
+    background-color: whitesmoke;
+    width: 55vw;
+    height: 85vh;
+}
+.deroulant-title{
+    background-color: rgb(216, 213, 213);
+    cursor: pointer;
+}
+.stop{
+    top:-30px;
+    color:#5264AE;
+}
+.selector .deroulant-template{
+    width: 15vw;
 }

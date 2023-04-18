@@ -94,6 +94,6 @@ body{
     margin-right: 0%;
     padding-top: 0%;
 }
-.deroulant-container{
-    top: 15px;
+.deroulant-template .deroulant li > p:hover {
+    color: #009ffd;
 }

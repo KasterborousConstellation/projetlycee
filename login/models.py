@@ -26,6 +26,7 @@ class Slot(models.Model):
 
 class Class(models.Model):
     professor = models.ForeignKey(Student,on_delete=models.CASCADE)
+    targeted_level = models.IntegerField(default=0)
     places = models.IntegerField(default=5)
     students = models.ManyToManyField(Student,related_name="class_student")
     month = models.IntegerField(default=1)

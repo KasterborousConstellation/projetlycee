@@ -1,29 +1,42 @@
 {% extends "../prof_navbar.html" %}
 {% block files_extends %}
 {% load static %} <link rel="stylesheet" href="{% static 'css/create_cours.css'' %}">
+{% load static %} <script type="text/javascript" src="{% static 'js/prof_01.js'%}"></script>
 {% endblock %}
 {% block content %}
 <h1>Créer un crénau de soutien</h1>
-<form action="" method="POST">
-    <div class="form-contaier">
+<form action="room" method="POST">
+    <div class="form-container box">
+        
         <div class="group">      
-            <input 
-            class="room-input" id="salle-input" list="rooms" type="text" required>
-            <span class="highlight"></span>
-            <span id="bar" class="bar"></span>
-            <label>Salle</label>
-            <label id="room-input-message"></label>
+            <div class ="selector">
+                <div class="deroulant-template">
+                    <input 
+                    class="room-input" id="room" type="text" required readonly="readonly">
+                    <label class="stop">Salle</label>
+                    <ul>
+                        <li class="deroulant-container"><a class ="deroulant-title" >Parcourir &ensp;</a>
+                           <ul class ="deroulant box">
+                                {% for elt in rooms %}
+                                <li><p class="nav-1">{{elt}}</p></li>
+                                {% endfor %}
+                           </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
         </div>
         <div class = "group">
             <div class ="selector">
                 <div class="deroulant-template">
-                    <input type="text" readonly="readonly">
+                    <input id="matiere" type="text" readonly="readonly">
                     <label class="stop">Matière</label>
                     <ul>
                         <li class="deroulant-container"><a class ="deroulant-title" >Parcourir &ensp;</a>
                            <ul class ="deroulant box">
                                 {% for elt in cours %}
-                                <li><p class="nav">{{elt.0}}</p></li>
+                                <li><p class="nav-2">{{elt.0}}</p></li>
                                 {% endfor %}
                            </ul>
                         </li>
@@ -31,11 +44,32 @@
                 </div>
             </div>
         </div>
+        <div class = "group">
+            <div class ="selector">
+                <div class="deroulant-template">
+                    <input id="classe" type="text" readonly="readonly">
+                    <label class="stop">Niveau</label>
+                    <ul>
+                        <li class="deroulant-container"><a class ="deroulant-title" >Parcourir &ensp;</a>
+                           <ul class ="deroulant box">
+                                {% for elt in classes %}
+                                <li><p class="nav-3">{{elt}}</p></li>
+                                {% endfor %}
+                           </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="group">
+            <input type='date' placeholder='{{placeholder}}' min="{{min}}" max="{{max}}" name='form[datetime]' id='datetime' />
+            <label for="form[datetime]">Date</label>
+        </div>
+        <div class="group">
+            <input type="range" id="size" name="size"
+                min="1" max="35" value="5">
+            <label id="direct-size" for="volume">Nombre de places: 5</label>
+        </div>
     </div>
-    <datalist id="rooms">
-        {% for room in rooms %}
-        <option value="{{room}}" ></option>
-        {% endfor %}
-    </datalist>
 </form>
 {% endblock %}
