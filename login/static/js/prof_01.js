@@ -41,4 +41,5 @@ window.onload= e =>{
     };
     range.addEventListener("input",lamba);
     range.addEventListener("change",lamba);
+    
 }

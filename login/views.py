@@ -160,6 +160,7 @@ def prof(request):
         context["rooms"]= ["201","202","203","204","205","206"]
         context["cours"]=cours
         context["classes"]= [get_classe(i) for i in range(5)]
+        context["days"]= ["Lundi","Mardi"]
         return render(request,'login/profs_content/prof_tab'+str(tab)+".html",context)
     else:
         return redirect(loginPage)

@@ -1,3 +1,4 @@
+
 window.onload = function() {
     if(!!window.chrome){
         var buttons = document.getElementsByClassName("headcol");
@@ -9,4 +10,5 @@ window.onload = function() {
             buttons[i].classList.add("chromefix-2");
         }
     }
+    
 }
