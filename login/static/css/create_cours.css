@@ -6,7 +6,6 @@
 
 .group { 
     position:relative; 
-    margin-top:30px; 
     left: 15vw;
     top:5vh;
 }
@@ -14,25 +13,28 @@ input 				{
   font-size:20px;
   padding:10px 10px 10px 5px;
   display:block;
-  width:17vw;
+  width: 210px;
   border:none;
-  border-bottom:1px solid #757575;
+  border-bottom:1px solid #1aafdd;
   height: 5vh;
   cursor: pointer;
 }
 .group input:focus { 
     outline:none;
 }
-
+.group .deroulant-container:hover input{
+    background-color: azure;
+}
+#direct-size{
+  right: 350px;
+}
 
 label 				 {
   color:#5264AE;
   font-size:20px;
   font-weight:normal;
-  position:absolute;
+  position:relative;
   pointer-events:none;
-  left:5px;
-  top:10px;
   transition:0.2s ease all; 
   -moz-transition:0.2s ease all; 
   -webkit-transition:0.2s ease all;
@@ -69,7 +71,7 @@ input:focus ~ label:not(#room-input-message,.stop,.special), input:valid ~ label
     position: relative;
     left:15vw;
     background-color: whitesmoke;
-    width: 55vw;
+    width: 1050px;
     height: 85vh;
 }
 .deroulant-title{
@@ -77,7 +79,7 @@ input:focus ~ label:not(#room-input-message,.stop,.special), input:valid ~ label
     cursor: pointer;
 }
 .stop{
-    top:-30px;
+    top:-5px;
 }
 .special{
   top: -80px;
@@ -97,7 +99,7 @@ input:focus ~ label:not(#room-input-message,.stop,.special), input:valid ~ label
 }
 
 .content .group-container  .deroulant-template  input{
-  width: 5vw;
+  width: 100px;
 }
 .group-container .deroulant-template ul{
     margin-right: 40px;
@@ -128,4 +130,10 @@ input:focus ~ label:not(#room-input-message,.stop,.special), input:valid ~ label
 .hidden-specific{
   margin-top: 20px;
   border: solid gainsboro 1px;
+}
+.deroulant-container{
+  top:-20px;
+}
+#size{
+  width: 350px;
 }

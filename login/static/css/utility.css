@@ -48,11 +48,9 @@
     z-index: 1000;
     max-height: 15vh;
     overflow-y: scroll;
-    scrollbar-width: none;
+    scrollbar-width: 1px;
 }
-.deroulant::-webkit-scrollbar { 
-    display: none;  /* Safari and Chrome */
-}
+
 .deroulant-template > ul li:hover .deroulant{
     display: block;
 }

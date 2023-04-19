@@ -12,11 +12,13 @@
         <div class="group">      
             <div class ="selector">
                 <div class="deroulant-template">
-                    <input 
-                    class="room-input" id="room" type="text" required readonly="readonly">
-                    <label class="stop">Salle</label>
+                    
                     <ul>
-                        <li class="deroulant-container"><a class ="deroulant-title" >Parcourir &ensp;</a>
+                        <li class="deroulant-container">
+                            <div>
+                                <label class="stop">Salle</label>
+                                <input class="room-input" id="room" type="text" required readonly="readonly">
+                            </div>
                            <ul class ="deroulant box">
                                 {% for elt in rooms %}
                                 <li><p class="nav-1">{{elt}}</p></li>
@@ -31,10 +33,14 @@
         <div class = "group">
             <div class ="selector">
                 <div class="deroulant-template">
-                    <input id="matiere" type="text" readonly="readonly">
-                    <label class="stop">Matière</label>
+                    
+                    
                     <ul>
-                        <li class="deroulant-container"><a class ="deroulant-title" >Parcourir &ensp;</a>
+                        <li class="deroulant-container">
+                            <div>
+                                <label class="stop">Matière</label>
+                                <input id="matiere" type="text" readonly="readonly">
+                            </div>
                            <ul class ="deroulant box">
                                 {% for elt in cours %}
                                 <li><p class="nav-2">{{elt.0}}</p></li>
@@ -48,10 +54,13 @@
         <div class = "group">
             <div class ="selector">
                 <div class="deroulant-template">
-                    <input id="classe" type="text" readonly="readonly">
-                    <label class="stop">Niveau</label>
+                    
                     <ul>
-                        <li class="deroulant-container"><a class ="deroulant-title" >Parcourir &ensp;</a>
+                        <li class="deroulant-container">
+                            <div>
+                                <label class="stop">Niveau</label>
+                                <input id="classe" type="text" readonly="readonly">
+                            </div>
                            <ul class ="deroulant box">
                                 {% for elt in classes %}
                                 <li><p class="nav-3">{{elt}}</p></li>
@@ -65,13 +74,16 @@
         <div class="group group-container">
                 <div class ="selector">
                     <div class="deroulant-template">
-                        <div>
-                            <input id="day" type="text" readonly="readonly">
-                            <label class="special">Jour</label>
-                        </div>
+                       
+                            
+                        
                         
                         <ul>
-                            <li class="deroulant-container"><a class ="deroulant-title" >Parcourir &ensp;</a>
+                            <li class="deroulant-container">
+                                <div>
+                                    <label class="stop">Jour</label>
+                                    <input id="day" type="text" readonly="readonly">
+                                </div>
                                <ul class ="deroulant box">
                                     {% for elt in days %}
                                     <li><p class="nav-4">{{elt}}</p></li>
@@ -79,12 +91,15 @@
                                </ul>
                             </li>
                         </ul>
-                        <div>
-                            <input id="hour" type="text" readonly="readonly">
-                            <label class="special">Heure</label>
-                        </div>
+                        
+                        
+                        
                         <ul>
-                            <li class="deroulant-container"><a class ="deroulant-title" >Parcourir &ensp;</a>
+                            <li class="deroulant-container">
+                                <div>
+                                    <label class="stop">Heure</label>
+                                    <input id="hour" type="text" readonly="readonly">
+                                </div>
                                <ul class ="deroulant box">
                                     {% for elt in hours %}
                                     <li><p class="nav-5">{{elt}}</p></li>
@@ -96,23 +111,24 @@
                 </div>
         </div>
         <div class="group">
+            <label class="stop" id="direct-size" for="volume">Nombre de places: 5</label>
             <input type="range" id="size" name="size"
                 min="1" max="35" value="5">
-            <label id="direct-size" for="volume">Nombre de places: 5</label>
+            
         </div>
         <div class="radios">
             <div>
-                <input type="radio" name="Hello" id="" value="repeat">
+                <input class="cours-radio" type="radio" name="option" id="" value="repeat">
                 <label for="repeat">Repeter toute l'année</label>
             </div>
             <div>
-                <input type="radio" name="" id="" value="post-week">
+                <input class="cours-radio" type="radio" name="option" id="" value="post-week" checked="true">
                 <label for="post-week">Uniquement la semaine prochaine</label>
             </div>
             <div>
-                <input type="radio" name="" id="" value="specific">
-                <label for="specific">Semaine spécifique</label>
-                <div class="hidden-specific" >
+                <input class="cours-radio" type="radio" name="option" id="specific" value="specific">
+                <label id="specific-label" for="specific">Semaine spécifique</label>
+                <div id="specific-div"class="hidden-specific" hidden>
                     <label for="specific-week">Semaine du</label>
                     <input class="specific-week"type="date" value="specific-week" step="7">
                 </div>
