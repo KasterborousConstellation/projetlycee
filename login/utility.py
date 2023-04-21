@@ -53,6 +53,18 @@ def getFinalDayForInscription():
     today = date.today()
     last = today - timedelta(days=(today.weekday()+2 )%7)+timedelta(days=6)
     return (last.day,last.month)
-
+def getNextWeekYear():
+    today = date.today()
+    last = today - timedelta(days=(today.weekday()+2 )%7)+timedelta(days=6)
+    return last.year
+def format_next_monday():
+    monday = getNextWeek()[0]
+    month = str(monday[1])
+    day = str(monday[0])
+    if(len(month)==1):
+        month ="0"+month
+    if(len(day)==1):
+        day= "0"+day 
+    return str(getNextWeekYear())+"-"+month+"-"+day
 
 

@@ -1,3 +1,16 @@
+:root {
+    --card-background: whitesmoke;
+    --special: cornflowerblue;
+    --onhover: rgb(235, 235, 235);
+    --background: white;
+    --soft-deroulant-background: azure;
+    --text-onhover: #009ffd;
+    --gray-1:#CCC;
+    --gray-2:gainsboro;
+    --gray-3: rgb(244, 248, 250);
+}
+
+
 .box{
     box-shadow: 0px 1px 1px black;
 }
@@ -31,18 +44,14 @@
     padding: 10px 0px;
 }
 .deroulant-template a:hover{
-    color: #009ffd;
-    border-bottom: 2px solid cornflowerblue;
-}
-
-.deroulant-title:hover{
-    color: #2a2a72;
+    color: var(--text-onhover);
+    border-bottom: 2px solid var(--special);
 }
 
 .deroulant{
     display: none;
-    box-shadow: 0px 1px 2px #CCC;
-    background-color: white;
+    box-shadow: 0px 1px 2px var(--gray-1);
+    background-color: var(--background);
     position: absolute;
     width: 100%;
     z-index: 1000;
@@ -65,7 +74,7 @@
 }
 .deroulant a:hover{
     border-bottom: none;
-    background-color: RGBa(200,200,200,0.1);
+    background-color: var(--onhover);
 }
 .deroulant-container > a::after{
     content:" ▼";

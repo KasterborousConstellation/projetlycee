@@ -10,5 +10,4 @@ window.onload = function() {
             buttons[i].classList.add("chromefix-2");
         }
     }
-    
 }

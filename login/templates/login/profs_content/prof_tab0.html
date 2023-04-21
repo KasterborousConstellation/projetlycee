@@ -8,11 +8,9 @@
 <h1>Créer un crénau de soutien</h1>
 <form action="room" method="POST">
     <div class="form-container box">
-        
         <div class="group">      
             <div class ="selector">
                 <div class="deroulant-template">
-                    
                     <ul>
                         <li class="deroulant-container">
                             <div>
@@ -28,13 +26,10 @@
                     </ul>
                 </div>
             </div>
-            
         </div>
         <div class = "group">
             <div class ="selector">
                 <div class="deroulant-template">
-                    
-                    
                     <ul>
                         <li class="deroulant-container">
                             <div>
@@ -54,7 +49,6 @@
         <div class = "group">
             <div class ="selector">
                 <div class="deroulant-template">
-                    
                     <ul>
                         <li class="deroulant-container">
                             <div>
@@ -74,10 +68,6 @@
         <div class="group group-container">
                 <div class ="selector">
                     <div class="deroulant-template">
-                       
-                            
-                        
-                        
                         <ul>
                             <li class="deroulant-container">
                                 <div>
@@ -91,9 +81,6 @@
                                </ul>
                             </li>
                         </ul>
-                        
-                        
-                        
                         <ul>
                             <li class="deroulant-container">
                                 <div>
@@ -112,9 +99,7 @@
         </div>
         <div class="group">
             <label class="stop" id="direct-size" for="volume">Nombre de places: 5</label>
-            <input type="range" id="size" name="size"
-                min="1" max="35" value="5">
-            
+            <input type="range" id="size" name="size" min="1" max="35" value="5">
         </div>
         <div class="radios">
             <div>
@@ -130,11 +115,12 @@
                 <label id="specific-label" for="specific">Semaine spécifique</label>
                 <div id="specific-div"class="hidden-specific" hidden>
                     <label for="specific-week">Semaine du</label>
-                    <input class="specific-week"type="date" value="specific-week" step="7">
+                    <input id="specific-calendar" min = "{{next_monday}}" class="specific-week" type="date" value="specific-week" step="7">
                 </div>
-                
-                
             </div>
+        </div>
+        <div class="">
+            <button type="submit" id="submit-button">Créer</button>
         </div>
     </div>
 </form>

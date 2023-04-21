@@ -4,6 +4,7 @@
 }
 body{
     overflow-x: hidden;
+    overflow-y: hidden;
     display: flex;
     height: 100%;
     margin: 0;
@@ -16,7 +17,7 @@ body{
     width: 15vw;
     height: 82vh;
     font-size: 1.4vw;
-    background-color: #f1f1f1;
+    background-color: var(--card-background);
 }
 .content{
     width: 83vw;
@@ -34,8 +35,8 @@ body{
 }
   
 .vertical-nav li a:hover {
-    background-color: rgb(216, 213, 213);
-    color: cornflowerblue;
+    background-color: var(--onhover);
+    color: var(--text-onhover);
 }
 .nav-header{
     border: 1px solid black;
@@ -50,13 +51,15 @@ body{
     margin: 0.5vh;
 }
 .nav-footer * {
-    background-color: whitesmoke;
+    background-color: var(--card-background);
     width: 100%;
     border-radius: 15px;
 }
 .nav-footer a:hover {
-    background-color: rgb(233, 233, 233);
+    background-color: var(--onhover);
+    color: var(--text-onhover);
 }
+
 .nav-footer{
     height: 6vh;
     border-bottom-left-radius: 15px;
@@ -69,23 +72,20 @@ body{
     font-size: 1.5vw;
 }
 
-.nav-footer:hover{
-    color: aqua;
-}
 .nav-footer a{
     position: relative;
     margin: 0;
     padding: 0;
     text-align: center;
     text-decoration: none;
-    color: #000;
+    color: black;
 }
 .content{
     font-size: 1.1vw;
     text-align: center;
     width: 85vw;
     padding-right: 0;
-    background-color: white;
+    background-color: var(--background);
     border-radius: 15px;
     top: 0px;
     margin-left: 0%;
@@ -95,5 +95,5 @@ body{
     padding-top: 0%;
 }
 .deroulant-template .deroulant li > p:hover {
-    color: #009ffd;
+    color: var(--text-onhover);
 }

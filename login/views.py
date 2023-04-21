@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.template import loader
 from django.views.decorators.csrf import csrf_protect
-from .utility import sha256, has_student, get_student, createUUID, convert_serie,get_classe,getNextWeek,getMonth,getFinalDayForInscription,get_matiere,get_style_attribute,convert_hour
+from .utility import sha256, has_student, get_student, createUUID, convert_serie,get_classe,getNextWeek,getMonth,getFinalDayForInscription,get_matiere,get_style_attribute,convert_hour,format_next_monday
 from .models import Token,Student,Class
 from .connection import connect
 @csrf_protect
@@ -162,6 +162,8 @@ def prof(request):
         context["classes"]= [get_classe(i) for i in range(5)]
         context["days"]= ["Lundi","Mardi","Mercredi","Jeudi","Vendredi"]
         context["hours"]= [convert_hour(i) for i in range(10)]
+        next= format_next_monday()
+        context["next_monday"]= next
         return render(request,'login/profs_content/prof_tab'+str(tab)+".html",context)
     else:
         return redirect(loginPage)

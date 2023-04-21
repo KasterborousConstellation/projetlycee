@@ -1,3 +1,6 @@
+:root{
+  --label-color:#5264AE;
+}
 .content ul *{
     margin: 0px;
     padding: 0px;
@@ -9,13 +12,13 @@
     left: 15vw;
     top:5vh;
 }
-input 				{
+input:not(.submit)	{
   font-size:20px;
   padding:10px 10px 10px 5px;
   display:block;
   width: 210px;
   border:none;
-  border-bottom:1px solid #1aafdd;
+  border-bottom:1px solid var(--text-onhover);
   height: 5vh;
   cursor: pointer;
 }
@@ -23,20 +26,20 @@ input 				{
     outline:none;
 }
 .group .deroulant-container:hover input{
-    background-color: azure;
+    background-color: var(--soft-deroulant-background);
 }
 #direct-size{
   right: 350px;
 }
 
 label 				 {
-  color:#5264AE;
+  color: var(--label-color);
   font-size:20px;
   font-weight:normal;
   position:relative;
   pointer-events:none;
   transition:0.2s ease all; 
-  -moz-transition:0.2s ease all; 
+  -moz-transition:0.2s ease all;  
   -webkit-transition:0.2s ease all;
 }
 
@@ -51,18 +54,18 @@ input:focus ~ label:not(#room-input-message,.stop,.special), input:valid ~ label
   display: flex;
 }
 .deroulant-template p  {
-    font-size: 1.1vw;
+    font-size: 90%;
     cursor: pointer;
 }
 .deroulant-template p:hover {
-  background-color: rgb(230, 228, 228);
+  background-color: var(--onhover);
 }
 .content .deroulant-template ul * {
   width: 100%;
 }
 .deroulant-template span:hover{
-    color: #009ffd;
-    border-bottom: 2px solid cornflowerblue;
+    color: var(--text-onhover);
+    border-bottom: 2px solid var(--special);
 }
 .content .deroulant-template .deroulant-container .deroulant-title{
   width: 13vw;
@@ -70,9 +73,9 @@ input:focus ~ label:not(#room-input-message,.stop,.special), input:valid ~ label
 .form-container{
     position: relative;
     left:15vw;
-    background-color: whitesmoke;
+    background-color: var(--card-background);
     width: 1050px;
-    height: 85vh;
+    height: 790px;
 }
 .deroulant-title{
     background-color: rgb(216, 213, 213);
@@ -122,18 +125,83 @@ input:focus ~ label:not(#room-input-message,.stop,.special), input:valid ~ label
   justify-content: center;
 }
 .content h1{
-  margin: 0;
+  margin: 15;
 }
 .radios .specific-week{
   width: 100%;
 }
 .hidden-specific{
   margin-top: 20px;
-  border: solid gainsboro 1px;
+  border: solid var(--gray-2) 1px;
 }
 .deroulant-container{
   top:-20px;
 }
 #size{
   width: 350px;
+}
+
+button:not(.submit){
+  background: var(--gray-2);
+}
+button:not(.submit):hover{
+  background: var(--gray-1);
+}
+button{
+  padding: 15px 40px;
+  background: var(--label-color);
+  border:0;
+  color: #fff;
+  text-transform: uppercase;
+  font-family: helvetica;
+  font-size: 12px;
+  letter-spacing: 3px;
+  position: relative;
+  transition: all .4s cubic-bezier(0.645, 0.045, 0.355, 1);
+  cursor: pointer;
+  display: block;
+  border-radius: 15px;
+  margin: 100px 400px;
+}
+
+.submit::after,
+.submit::before{
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 0px;
+  transform: translateY(-50%);
+  opacity: 0;
+  transition: all .4s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+.submit::after{
+    width: 30px;
+    height: 1px;
+    background: white;
+    transform: translateX(-3px);
+    margin-top: 0px;
+}
+
+.submit::before{
+    content: "";
+    transform: rotate(-135deg) translateX(50%);
+    width: 11px;
+    height: 11px;
+    background: transparent;
+    border-left: 1px solid white;
+    border-bottom: 1px solid white;
+    margin-top: -1px;
+}
+
+
+.submit:hover{
+  padding: 15px 60px 15px 20px;
+  
+}
+
+.submit:hover::after,
+.submit:hover::before{
+  opacity: 1;
+  right: 15px;
 }
