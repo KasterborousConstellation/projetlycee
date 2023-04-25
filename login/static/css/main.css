@@ -197,6 +197,7 @@ tbody tr td {
     position: absolute;
     background: #00B4FC;
     color: black;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif, Geneva, Tahoma, sans-serif;
     border-radius: 2px;
     text-align: left;
     z-index: 0;
@@ -281,6 +282,10 @@ main{
     border-top: solid grey 1px;
     border-right: solid grey 1px;
     height: 105%;
+    z-index: 1;
+}
+.event-main p {
+    font-size: 0.8vw;
 }
 .event-addon{
     border-left: solid grey 1px;

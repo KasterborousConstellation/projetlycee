@@ -22,6 +22,7 @@ urlpatterns = [
     re_path(r'^admin/', admin.site.urls),
     re_path(r'^soutien/subscribe$',views.subscribe),
     re_path(r'^soutien/$',views.site),
+    re_path(r'^prof/room$',views.room),
     re_path(r'^prof/$',views.prof),
     re_path(r'^$',views.loginPage),
     re_path(r'^login$',views.login),

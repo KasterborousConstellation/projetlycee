@@ -17,7 +17,7 @@ class Token(models.Model):
     student = models.ForeignKey(Student,on_delete=models.CASCADE)
 
 class Room(models.Model):
-    name = models.CharField(max_length=30)
+    name = models.CharField(max_length=30,unique=True)
 
 class Slot(models.Model):
     matiere= models.CharField(max_length=20)
